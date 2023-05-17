@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   text-align: center;
 }
@@ -37,18 +41,19 @@
   }
 }
 
-.V1, .V2, .V3 {
+text{
   display: none;
+  /* color:white;
+  display: inline; */
 }
 
 .knob {
-  padding: 120px;
+  /* padding: 120px; */
   display: inline;
   
 }
 
-span {
-  position: relative;
-  left: 30px;
-  
-}
+
+/* .ValueLabel {
+  padding-left: 190px;
+} */

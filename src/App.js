@@ -1,5 +1,5 @@
 import logo from "./logo.svg";
-import "./App.css";
+import "./output.css";
 import Level from "./Level";
 import React, { useRef, useEffect, useState } from "react";
 import { rbetaOne, rbinomOne } from "lib-r-math.js";
@@ -12,8 +12,7 @@ Array.prototype.random = function () {
 
 export default function App() {
   const [level, setLevel] = useState(null)
-
-
+  const [start, setStart] = useState(0)
   const [fxbetas, setFXBetas] = useState({
     compressor: 150,
     reverb: 150,
@@ -23,13 +22,6 @@ export default function App() {
     pan: 150,
   });
 
-  function newLevel(fxbetas) {
-    let fx = Object.keys(fxbetas).random();
-    let beta = fxbetas[fx];
-    let bbsample = rbinomOne(10, rbetaOne(15, beta));
-    fx = ['delay', 'reverb'].random()
-    return <Level fx= {fx} bbsample = {1} onComplete = {onComplete}></Level>;
-  }
 
   function onComplete(tries, fx) {
 
@@ -45,9 +37,18 @@ export default function App() {
       ob < 150 ? (nb = ob + 5) : (nb = nb);
     }
     setFXBetas({ ...fxbetas, [fx]: nb });
+    alert("Correct!")
     setLevel(newLevel(fxbetas))
   }
-
+let p = 0
+  function newLevel(fxbetas) {
+    let fx = Object.keys(fxbetas).random();
+    let beta = fxbetas[fx];
+    let bbsample = rbinomOne(10, rbetaOne(15, beta));
+    fx = ['delay', 'reverb', 'compression', 'pan', 'distortion'].random()
+    // fx = ['delay', 'distortion'].random()
+    return <Level fx= {fx} bbsample = {1} onComplete = {onComplete}></Level>;
+  }
 
   // useEffect(() => {
   //   level =  newLevel(fxbetas)
